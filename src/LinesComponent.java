@@ -27,7 +27,9 @@ private static class Line{
     int x1; 
     int y1;
     int x2;
-    int y2;   
+    int y2;
+    int z1;
+    int z2;
     Color color;
 
     public Line(int x1, int y1, int x2, int y2, Color color) {
@@ -35,8 +37,34 @@ private static class Line{
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
+        this.z1 = 0;
+        this.z2 = 0;
+        this.color = color;
+    }
+    public Line(int x1, int y1, int x2, int y2, int z1, int z2, Color color) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+        this.z1 = z1;
+        this.z2 = z2;
         this.color = color;
     }               
+}
+
+private static class Dot{
+    int x1; 
+    int y1;
+    int z1;
+    Color color;
+
+
+    public Dot(int x1, int y1, int z1) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.z1 = z1;
+        this.color = color.BLACK;
+    }       
 }
 
 public static boolean isNumeric(String s) {  
@@ -44,9 +72,20 @@ public static boolean isNumeric(String s) {
 }  
 
 private final static LinkedList<Line> lines = new LinkedList<Line>();
+private final static LinkedList<Dot> dots = new LinkedList<Dot>();
 
 public void addLine(int x1, int x2, int x3, int x4) {
     addLine(x1, x2, x3, x4, Color.black);
+    repaint();
+}
+
+public void addDot(int x1, int x2, int x3) {
+    dots.add(new Dot(x1, x2, x3));
+    repaint();
+}
+
+public void addLine(int x1, int x2, int x3, int x4, int x5, int x6, Color color) {
+    lines.add(new Line(x1,x2,x3,x4,x5,x6,color));        
     repaint();
 }
 
@@ -130,10 +169,15 @@ protected void paintComponent(Graphics g) {
 
 		g.drawLine(10, 100, 1000, 100);
        
-    for (Line line : lines) {
+    for (Line line : lines) { //TODO 3D lines
         g.setColor(line.color);
         System.out.println(line.x1 + " " + line.y1 + " " + line.x2 + " " + line.y2);
         g.drawLine(line.x1, 1000 - line.y1, line.x2, 1000 - line.y2);
+        
+    }
+    for (Dot dot : dots) { //TODO 3D dots
+        g.setColor(dot.color);
+        g.drawLine(dot.x1, 1000 - dot.y1, dot.x1, 1000 - dot.y1);
         
     }
 }
