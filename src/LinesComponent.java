@@ -318,7 +318,7 @@ public static void main(String[] args) {
 		}  	
     });
     
-    removeLineButton.addActionListener(new ActionListener() { //adds 2 vectors to each other	
+    removeLineButton.addActionListener(new ActionListener() { //remove vector	
     	public void actionPerformed(ActionEvent e) {
 		  JPanel mySelectPanel = new JPanel();
 		  mySelectPanel.setPreferredSize(new Dimension(400,300));
@@ -394,12 +394,13 @@ public static void main(String[] args) {
 							System.out.println("Line2: " + line2.x1 + " " + line2.y1 + " " + line2.x2 + " " + line2.y2);
 							if(line1.x1 == line2.x1 && line1.y1 == line2.y1){
 								System.out.println("Seems they are right!");
-								int startx = line1.x2;
-								int starty = line1.y2;
-								int endx = line1.x2 + line2.x2;
-								int endy = line1.y2 + line2.y2;								
-								//Line linex = new Line(startx, starty, endx, endy, Color.black);
-								//lines.add(linex);								
+								int vectorx = line2.x2 - line2.x1;
+					        	int vectory = line2.y2 - line2.y1;
+					        	System.out.println("Vector 1: " + vectorx);
+					        	System.out.println("Vector 2: " + vectory);
+								System.out.println("Line2: " + line2.x1 + " " + line2.y1 + " " + (line2.x2 - vectorx)  + " " + (line2.y2 - vectory));
+								int endx = line1.x2 + vectorx;
+								int endy = line1.y2 + vectory;															
 								Line liney = new Line(line1.x1, line1.y1, endx, endy, Color.RED);
 								lines.add(liney);
 								
